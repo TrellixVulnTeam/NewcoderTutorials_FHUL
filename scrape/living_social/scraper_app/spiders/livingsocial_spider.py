@@ -10,7 +10,7 @@ Scrapy spider part - it actually performs scraping.
 """
 
 from scrapy.spider import BaseSpider
-from scrapy.selector import HtmlXPathSelector
+from scrapy.selector import Selector
 from scrapy.contrib.loader import XPathItemLoader
 from scrapy.contrib.loader.processor import Join, MapCompose
 
@@ -23,16 +23,16 @@ class LivingSocialSpider(BaseSpider):
     """
     name = "livingsocial"
     allowed_domains = ["livingsocial.com"]
-    start_urls = ["https://www.livingsocial.com/cities/15-san-francisco"]
+    start_urls = ["https://www.livingsocial.com/local/san-francisco"]
 
-    deals_list_xpath = '//li[@dealid]'
+    deals_list_xpath = '//figure[@class="card-ui cui-c-udc cui-c-udc-featured-list"]'
     item_fields = {
-        'title': './/span[@itemscope]/meta[@itemprop="name"]/@content',
+        'title': './/a//div[@class="cui-udc-title c-txt-black two-line-ellipsis"]/text()',
         'link': './/a/@href',
-        'location': './/a/div[@class="deal-details"]/p[@class="location"]/text()',
-        'original_price': './/a/div[@class="deal-prices"]/div[@class="deal-strikethrough-price"]/div[@class="strikethrough-wrapper"]/text()',
-        'price': './/a/div[@class="deal-prices"]/div[@class="deal-price"]/text()',
-        'end_date': './/span[@itemscope]/meta[@itemprop="availabilityEnds"]/@content'
+        'location': './/span[@class="cui-location-name "]//text()',
+        'original_price': './/s/text()',
+        'price': './/div[@class="cui-price"]/span/text()',
+        'distance': './/span[@class="cui-location-distance "]//text()'
     }
 
     def parse(self, response):
@@ -40,12 +40,12 @@ class LivingSocialSpider(BaseSpider):
         Default callback used by Scrapy to process downloaded responses
 
         Testing contracts:
-        @url http://www.livingsocial.com/cities/15-san-francisco
+        @url https://www.livingsocial.com/local/san-francisco
         @returns items 1
         @scrapes title link
 
         """
-        selector = HtmlXPathSelector(response)
+        selector = Selector(response)
 
         # iterate over deals
         for deal in selector.xpath(self.deals_list_xpath):

@@ -1,6 +1,6 @@
 import csv
 
-MY_FILE = "C:/PyProjects/NewcoderTutorials/dataviz_workspace/data/sample_sfpd_incident_all.csv"
+MY_FILE = "../dataviz/data/sample_sfpd_incident_all.csv"
 
 def parse(raw_file, delimiter):
     """Parses a raw CSV file to a JSON-like object."""
@@ -15,7 +15,7 @@ def parse(raw_file, delimiter):
     parsed_data = []
 
     # Skip over the first line of the file for the headers
-    fields = csv_data.__next__()
+    fields = csv_data.next()
 
     # Iterate over each row of the csv file, zip together field -> value
     for row in csv_data:

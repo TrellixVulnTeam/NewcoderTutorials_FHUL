@@ -19,6 +19,7 @@ class LivingSocialSpider(BaseSpider):
         'original_price': './/a/div[@class="deal-prices"]/div[@class="deal-strikethrough-price"]/div[@class="strikethrough-wrapper"]/text()',
         'price': './/a/div[@class="deal-prices"]/div[@class="deal-price"]/text()',
         'end_date': './/span[@itemscope]/meta[@itemprop="availabilityEnds"]/@content'
+	}
 
     def parse(self, response):
         """

@@ -6,8 +6,8 @@ DATABASE = {
     'drivername': 'postgres',
     'host': 'localhost',
     'port': '5432',
-    'username': 'Daniel Cook',
-    'password': '1i9lsijc',
+    'username': 'postgres',
+    'password': 'abcdefgh',
     'database': 'scrape'
 }
 

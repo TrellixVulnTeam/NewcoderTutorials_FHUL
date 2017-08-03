@@ -38,6 +38,10 @@ import tablib
 
 CPI_DATA_URL = 'http://research.stlouisfed.org/fred2/data/CPIAUCSL.txt'
 
+DOWNLOAD_DELAY = 5
+
+COOKIES_ENABLED = False
+
 
 class CPIData(object):
     """Abstraction of the CPI data provided by FRED.
@@ -232,7 +236,8 @@ class GiantbombAPI(object):
             params['offset'] = num_fetched_results
             result = requests.get(self.base_url + '/platforms/',
                                   params=params)
-            result = result.json()
+            print (result)
+	    result = result.json()
             if num_total_results is None:
                 num_total_results = int(result['number_of_total_results'])
             num_fetched_results += int(result['number_of_page_results'])

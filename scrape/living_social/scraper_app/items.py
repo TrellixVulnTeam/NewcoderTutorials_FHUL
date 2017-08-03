@@ -19,4 +19,4 @@ class LivingSocialDeal(Item):
     location = Field()
     original_price = Field()
     price = Field()
-    end_date = Field()
+    distance = Field()

@@ -10,13 +10,15 @@ BOT_NAME = 'livingsocial'
 
 SPIDER_MODULES = ['scraper_app.spiders']
 
-ITEM_PIPELINES = ['scraper_app.pipelines.LivingSocialPipeline']
+ITEM_PIPELINES = {
+    'scraper_app.pipelines.LivingSocialPipeline': 1,
+}
 
 DATABASE = {
     'drivername': 'postgres',
     'host': 'localhost',
     'port': '5432',
-    'username': 'YOUR_USERNAME',  # fill in your username here
-    'password': 'YOUR_PASSWORD',  # fill in your password here
+    'username': 'postgres',  # fill in your username here
+    'password': 'abcdefgh',  # fill in your password here
     'database': 'scrape'
 }
